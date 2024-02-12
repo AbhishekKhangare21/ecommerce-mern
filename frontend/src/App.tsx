@@ -1,12 +1,24 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import { Suspense, lazy } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Loader from "./components/loader";
 
-function App() {
-  const [count, setCount] = useState(0);
+const Home = lazy(() => import("./pages/home"));
+const Search = lazy(() => import("./pages/search"));
+const Cart = lazy(() => import("./pages/cart"));
 
-  return <div>hi</div>;
-}
+const App = () => {
+  return (
+    <Router>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+      </Suspense>
+      {/*  */}
+    </Router>
+  );
+};
 
 export default App;
