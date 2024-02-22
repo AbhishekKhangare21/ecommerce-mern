@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { VscError } from "react-icons/vsc";
 
 const cartItems = [];
@@ -11,6 +11,10 @@ const total = subtotal + tax + shippingCharges;
 function Cart() {
   const [coupenCode, setCoupenCode] = useState<string>("");
   const [isValidCoupenCode, setIsValidCoupenCode] = useState<boolean>(false);
+
+  useEffect(() => {
+    return () => {};
+  }, [coupenCode]);
 
   return (
     <div className="cart">
