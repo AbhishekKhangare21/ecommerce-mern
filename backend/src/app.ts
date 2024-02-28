@@ -9,6 +9,8 @@ connectDB();
 
 const app = express();
 
+app.use(express.json());
+
 // Using Routes
 app.use("/api/v1/user", userRoute);
 
