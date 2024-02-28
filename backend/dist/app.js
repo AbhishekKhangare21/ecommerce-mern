@@ -1,7 +1,9 @@
 import express from "express";
 // Importing Routes
 import userRoute from "./routes/user.js";
+import { connectDB } from "./utils/features.js";
 const port = 4000;
+connectDB();
 const app = express();
 // Using Routes
 app.use("/api/v1/user", userRoute);
