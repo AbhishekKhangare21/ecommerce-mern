@@ -1,8 +1,9 @@
-import { NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 import { User } from "../models/user.js";
+import { NewUserRequestBody } from "../types/types.js";
 
 export const newUser = async (
-  req: Request,
+  req: Request<{}, {}, NewUserRequestBody>,
   res: Response,
   next: NextFunction
 ) => {
