@@ -13,7 +13,18 @@ function Cart() {
   const [isValidCoupenCode, setIsValidCoupenCode] = useState<boolean>(false);
 
   useEffect(() => {
-    return () => {};
+    const timeOutID = setTimeout(() => {
+      if (Math.random() > 0.5) {
+        setIsValidCoupenCode(true);
+      } else {
+        setIsValidCoupenCode(false);
+      }
+    }, 1000);
+
+    return () => {
+      clearTimeout(timeOutID);
+      setIsValidCoupenCode(false);
+    };
   }, [coupenCode]);
 
   return (
