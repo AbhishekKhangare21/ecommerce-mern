@@ -1,6 +1,8 @@
 import express from "express";
+
 // Importing Routes
 import userRoute from "./routes/user.js";
+import productRoute from "./routes/product.js";
 import { connectDB } from "./utils/features.js";
 import NodeCache from "node-cache";
 
