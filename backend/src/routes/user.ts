@@ -11,7 +11,7 @@ const app = express.Router();
 
 // route - /api/v1/user/new
 app.post("/new", newUser);
-5;
+
 // Route - /api/v1/user/all
 app.get("/all", adminOnly, getAllUsers);
 
