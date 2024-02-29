@@ -13,6 +13,7 @@ app.use(express.json());
 
 // Using Routes
 app.use("/api/v1/user", userRoute);
+app.use("/api/v1/product", productRoute);
 
 app.listen(port, () => {
   console.log(`Express is working on http://localhost:${port}`);
