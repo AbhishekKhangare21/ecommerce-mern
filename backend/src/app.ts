@@ -1,21 +1,31 @@
 import express from "express";
+import { connectDB } from "./utils/features.js";
+import NodeCache from "node-cache";
+import { config } from "dotenv";
+import morgan from "morgan";
+import cors from "cors";
 
 // Importing Routes
 import userRoute from "./routes/user.js";
 import productRoute from "./routes/product.js";
 import orderRoute from "./routes/order.js";
-import { connectDB } from "./utils/features.js";
-import NodeCache from "node-cache";
 
-const port = 4000;
+config({
+  path: "./.env",
+});
 
-connectDB();
+const port = process.env.PORT || 4000;
+const mongoURI = process.env.MONGO_URI || "";
+
+connectDB(mongoURI);
 
 export const myCache = new NodeCache();
 
 const app = express();
 
 app.use(express.json());
+app.use(morgan("dev"));
+app.use(cors());
 
 // Using Routes
 app.use("/api/v1/user", userRoute);
