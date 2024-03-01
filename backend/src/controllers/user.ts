@@ -11,13 +11,14 @@ export const newUser = TryCatch(
     next: NextFunction
   ) => {
     const { name, email, photo, gender, _id, dob } = req.body;
+    console.log("req.body ======>", req.body);
 
     let user = await User.findById(_id);
 
     if (user)
       return res.status(200).json({
         success: true,
-        message: `Welcome, ${user.name}`,
+        message: `User with id ${_id} already exists`,
       });
 
     if (!_id || !name || !email || !photo || !gender || !dob)
