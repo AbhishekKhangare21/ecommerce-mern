@@ -3,7 +3,6 @@ import { TryCatch } from "../middlewares/error.js";
 import ErrorHandler from "../utils/utility-class.js";
 export const newUser = TryCatch(async (req, res, next) => {
     const { name, email, photo, gender, _id, dob } = req.body;
-    console.log("req.body ======>", req.body);
     let user = await User.findById(_id);
     if (user)
         return res.status(200).json({
