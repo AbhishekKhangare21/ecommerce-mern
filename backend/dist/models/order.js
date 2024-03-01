@@ -37,10 +37,12 @@ const schema = new mongoose.Schema({
     },
     shippingCharges: {
         type: Number,
+        default: 0,
         required: true,
     },
     discount: {
         type: Number,
+        default: 0,
         required: true,
     },
     total: {
