@@ -9,6 +9,7 @@ import cors from "cors";
 import userRoute from "./routes/user.js";
 import productRoute from "./routes/product.js";
 import orderRoute from "./routes/order.js";
+import { errorMiddleware } from "./middlewares/error.js";
 
 config({
   path: "./.env",
@@ -31,6 +32,9 @@ app.use(cors());
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/product", productRoute);
 app.use("/api/v1/order", orderRoute);
+
+app.use("/uploads", express.static("uploads"));
+app.use(errorMiddleware);
 
 app.listen(port, () => {
   console.log(`Express is working on http://localhost:${port}`);
