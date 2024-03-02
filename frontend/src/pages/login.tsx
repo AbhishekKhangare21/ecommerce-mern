@@ -1,8 +1,4 @@
-import {
-  GoogleAuthProvider,
-  signInWithCredential,
-  signInWithPopup,
-} from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
@@ -19,6 +15,8 @@ const Login = () => {
 
       console.log(user);
     } catch (error) {
+      console.log(error);
+
       toast.error("Sign In Failed");
     }
   };
