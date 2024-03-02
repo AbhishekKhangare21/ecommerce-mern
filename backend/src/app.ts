@@ -1,15 +1,16 @@
 import express from "express";
 import { connectDB } from "./utils/features.js";
+import { errorMiddleware } from "./middlewares/error.js";
 import NodeCache from "node-cache";
 import { config } from "dotenv";
 import morgan from "morgan";
+import Stripe from "stripe";
 import cors from "cors";
 
 // Importing Routes
 import userRoute from "./routes/user.js";
 import productRoute from "./routes/product.js";
 import orderRoute from "./routes/order.js";
-import { errorMiddleware } from "./middlewares/error.js";
 
 config({
   path: "./.env",
