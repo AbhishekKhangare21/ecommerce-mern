@@ -10,6 +10,7 @@ import { userExist, userNotExist } from "./redux/reducer/userReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "./redux/api/userAPI";
 import { UserReducerInitialState } from "./types/reducer-types";
+import ProtectedRoute from "./components/protected-route";
 
 const Home = lazy(() => import("./pages/home"));
 const Search = lazy(() => import("./pages/search"));
@@ -67,7 +68,14 @@ const App = () => {
 
           {/*Not Logged in User Route */}
           <Route>
-            <Route path="/login" element={<Login />} />
+            <Route
+              path="/login"
+              element={
+                <ProtectedRoute isAuthenticated={user ? false : true}>
+                  <Login />
+                </ProtectedRoute>
+              }
+            />
           </Route>
 
           {/* Logged in User Routes */}
