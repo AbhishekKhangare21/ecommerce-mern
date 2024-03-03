@@ -7,10 +7,13 @@ import {
   FaSignOutAlt,
 } from "react-icons/fa";
 import { useState } from "react";
+import { User } from "../types/types";
 
-const user = { _id: "", role: "" };
+interface Propstype {
+  user: User | null;
+}
 
-const Header = () => {
+const Header = ({ user }: Propstype) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const logOutHandler = () => {
