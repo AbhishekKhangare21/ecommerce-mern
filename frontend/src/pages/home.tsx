@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import ProductCard from "../components/product-card";
+import { useLatestProductsQuery } from "../redux/api/productAPI";
+import { Skeleton } from "../components/loader";
 
 const Home = () => {
+  const { data, isLoading, isError } = useLatestProductsQuery("");
+
   const addToCartHandler = () => {};
   return (
     <div className="home">
@@ -15,14 +19,21 @@ const Home = () => {
       </h1>
 
       <main>
-        <ProductCard
-          productId="adsaskd"
-          name="Macbook"
-          price={349}
-          stock={43}
-          handler={addToCartHandler}
-          photo="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-space-gray-select-201810?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1664472289661"
-        />
+        {isLoading ? (
+          <Skeleton width="80vw" />
+        ) : (
+          data?.products.map((i) => (
+            <ProductCard
+              key={i._id}
+              productId={i._id}
+              name={i.name}
+              price={i.price}
+              stock={i.stock}
+              handler={addToCartHandler}
+              photo={i.photo}
+            />
+          ))
+        )}
       </main>
     </div>
   );
