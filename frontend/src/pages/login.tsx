@@ -3,11 +3,14 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { auth } from "../firebase";
-import { useLoginMutation } from "../redux/api/userAPI";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { getUser, useLoginMutation } from "../redux/api/userAPI";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import { MessageResponse } from "../types/api-types";
+import { userExist, userNotExist } from "../redux/reducer/userReducer";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const [gender, setGender] = useState("");
   const [date, setDate] = useState("");
 
@@ -17,6 +20,16 @@ const Login = () => {
     try {
       const provider = new GoogleAuthProvider();
       const { user } = await signInWithPopup(auth, provider);
+
+      console.log({
+        name: user.displayName!,
+        email: user.email!,
+        photo: user.photoURL!,
+        gender,
+        role: "user",
+        dob: date,
+        _id: user.uid,
+      });
 
       const res = await login({
         name: user.displayName!,
@@ -30,17 +43,16 @@ const Login = () => {
 
       if ("data" in res) {
         toast.success(res.data.message);
+        const data = await getUser(user.uid);
+        dispatch(userExist(data?.user!));
       } else {
         const error = res.error as FetchBaseQueryError;
         const message = (error.data as MessageResponse).message;
         toast.error(message);
+        dispatch(userNotExist());
       }
-
-      console.log(user);
     } catch (error) {
-      console.log(error);
-
-      toast.error("Sign In Failed");
+      toast.error("Sign In Fail");
     }
   };
 
@@ -48,6 +60,7 @@ const Login = () => {
     <div className="login">
       <main>
         <h1 className="heading">Login</h1>
+
         <div>
           <label>Gender</label>
           <select value={gender} onChange={(e) => setGender(e.target.value)}>
@@ -69,8 +82,7 @@ const Login = () => {
         <div>
           <p>Already Signed In Once</p>
           <button onClick={loginHandler}>
-            <FcGoogle />
-            <span>Sign in with Google</span>
+            <FcGoogle /> <span>Sign in with Google</span>
           </button>
         </div>
       </main>
