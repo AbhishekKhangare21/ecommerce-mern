@@ -98,7 +98,7 @@
 
       > img {
         @include square(5rem);
-        object-fit: cover;
+        object-fit: contain;
         border-radius: 5px;
       }
 
@@ -170,7 +170,7 @@
 
   > img {
     @include square(4rem);
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 5px;
   }
   > span {
