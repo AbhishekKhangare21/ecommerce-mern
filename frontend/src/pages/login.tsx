@@ -80,7 +80,7 @@ const Login = () => {
         </div>
 
         <div>
-          <p>Already Signed In Once</p>
+          <p>Already Have An Account</p>
           <button onClick={loginHandler}>
             <FcGoogle /> <span>Sign in with Google</span>
           </button>
