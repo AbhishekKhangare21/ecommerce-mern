@@ -6,6 +6,7 @@ import ProductCard from "../components/product-card";
 import { useLatestProductsQuery } from "../redux/api/productAPI";
 import { addToCart } from "../redux/reducer/cartReducer";
 import { CartItem } from "../types/types";
+import { imgData } from "../../db/images";
 
 const Home = () => {
   const { data, isLoading, isError } = useLatestProductsQuery("");
@@ -35,17 +36,25 @@ const Home = () => {
         {isLoading ? (
           <Skeleton width="80vw" />
         ) : (
-          data?.products.map((i) => (
-            <ProductCard
-              key={i._id}
-              productId={i._id}
-              name={i.name}
-              price={i.price}
-              stock={i.stock}
-              handler={addToCartHandler}
-              photo={i.photo}
-            />
-          ))
+          data?.products
+            .map((prod, i) => {
+              return {
+                ...prod,
+                localImg: imgData[i].images[0],
+              };
+            })
+            .map((i) => (
+              <ProductCard
+                key={i._id}
+                productId={i._id}
+                name={i.name}
+                price={i.price}
+                stock={i.stock}
+                handler={addToCartHandler}
+                // photo={i.photo}
+                photo={i.localImg}
+              />
+            ))
         )}
       </main>
     </div>
