@@ -10,7 +10,6 @@ import { Skeleton } from "../components/loader";
 import { CartItem } from "../types/types";
 import { addToCart } from "../redux/reducer/cartReducer";
 import { useDispatch } from "react-redux";
-import { imgData } from "../../db/images";
 
 const Search = () => {
   const {
@@ -111,25 +110,17 @@ const Search = () => {
           <Skeleton length={10} />
         ) : (
           <div className="search-product-list">
-            {searchedData?.products
-              .map((prod, i) => {
-                return {
-                  ...prod,
-                  localImg: imgData[i].images[0],
-                };
-              })
-              .map((i) => (
-                <ProductCard
-                  key={i._id}
-                  productId={i._id}
-                  name={i.name}
-                  price={i.price}
-                  stock={i.stock}
-                  handler={addToCartHandler}
-                  // photo={i.photo}
-                  photo={i.localImg}
-                />
-              ))}
+            {searchedData?.products.map((i) => (
+              <ProductCard
+                key={i._id}
+                productId={i._id}
+                name={i.name}
+                price={i.price}
+                stock={i.stock}
+                handler={addToCartHandler}
+                photo={i.photo}
+              />
+            ))}
           </div>
         )}
 
