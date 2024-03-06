@@ -10,6 +10,7 @@ import { Skeleton } from "../../components/loader";
 import { useAllProductsQuery } from "../../redux/api/productAPI";
 import { RootState, server } from "../../redux/store";
 import { CustomError } from "../../types/api-types";
+import { imgData } from "../../../db/images";
 interface DataType {
   photo: ReactElement;
   name: string;
@@ -52,12 +53,18 @@ const Products = () => {
     const err = error as CustomError;
     toast.error(err.data.message);
   }
+  console.log(data?.products);
+  const newData =
+    data?.products.map((prod, i) => {
+      return { ...prod, localImg: imgData[i]?.images[0] };
+    }) || [];
 
   useEffect(() => {
     if (data)
       setRows(
-        data.products.map((i) => ({
-          photo: <img src={`${server}/${i.photo}`} />,
+        newData.map((i) => ({
+          // photo: <img src={`${server}/${i.photo}`} />,
+          photo: <img src={`${i.localImg}`} />,
           name: i.name,
           price: i.price,
           stock: i.stock,

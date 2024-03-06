@@ -112,10 +112,10 @@ const Search = () => {
         ) : (
           <div className="search-product-list">
             {searchedData?.products
-              .map((prod) => {
+              .map((prod, i) => {
                 return {
                   ...prod,
-                  localImg: imgData[0].images[0],
+                  localImg: imgData[i].images[0],
                 };
               })
               .map((i) => (

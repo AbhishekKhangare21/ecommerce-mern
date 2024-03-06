@@ -37,10 +37,10 @@ const Home = () => {
           <Skeleton width="80vw" />
         ) : (
           data?.products
-            .map((prod) => {
+            .map((prod, i) => {
               return {
                 ...prod,
-                localImg: imgData[0].images[0],
+                localImg: imgData[i].images[0],
               };
             })
             .map((i) => (
