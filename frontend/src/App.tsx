@@ -122,6 +122,7 @@ const App = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
+
       <Toaster position="bottom-center" />
     </Router>
   );
