@@ -8,7 +8,8 @@ import AdminSidebar from "../../components/admin/AdminSidebar";
 import TableHOC from "../../components/admin/TableHOC";
 import { Skeleton } from "../../components/loader";
 import { useAllProductsQuery } from "../../redux/api/productAPI";
-import { RootState, server } from "../../redux/store";
+// import { RootState, server } from "../../redux/store";
+import { RootState } from "../../redux/store";
 import { CustomError } from "../../types/api-types";
 import { imgData } from "../../../db/images";
 interface DataType {
