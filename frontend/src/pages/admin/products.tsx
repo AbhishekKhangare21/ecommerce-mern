@@ -10,7 +10,6 @@ import { Skeleton } from "../../components/loader";
 import { useAllProductsQuery } from "../../redux/api/productAPI";
 import { RootState, server } from "../../redux/store";
 import { CustomError } from "../../types/api-types";
-
 interface DataType {
   photo: ReactElement;
   name: string;
